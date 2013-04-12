@@ -11,8 +11,8 @@ Please select a table and then attribute to search for. </p>
 
 var categories = [];categories["startList"] = ["Member","Equipment","Training"]
 
-categories["Member"] = ["First Name","Last Name","A00#", "Birth Date", "Death Date", "Rank", "Class Year", "ROTC", "Cell Number", "Room Number"];
-categories["Equipment"] = ["Purchase Date","State","Death Date"];
+categories["Member"] = ["FullName", "StudentID", "BirthDate", "DeathDate", "Rank", "ClassYear", "ROTC", "CellNumber", "RoomNumber"];
+categories["Equipment"] = ["PurchaseDate","State","DeathDate"];
 categories["Training"] = ["Date","Duration","Description"];
 
 
@@ -48,20 +48,15 @@ navigator.appName == "Microsoft Internet Explorer" ? attachEvent('onload', init,
 </head>
 
 <body>
-<form action="">
-<select name='List1' onchange="fillSelect(this.value,this.form['List2'])">
+<form name="input" action="http://localhost/mcw/ins/viewscript.php" method="post">
+<select name='Table' onchange="fillSelect(this.value,this.form['Attribute'])">
 <option selected>Select Table</option>
 </select>
 &nbsp;
-<select name='List2' >
+<select name='Attribute' >
 <option selected >Select Attribute</option>
 </select>
-</form>
-
-<form name="input"
-action="x"
-method="get">
-Search: <input name="Search DB" value="Search DB" type="text"><br>
+Search: <input name="SearchText" value="Search DB" type="text"><br>
 <input value="Submit" type="submit">
 </form>
 
