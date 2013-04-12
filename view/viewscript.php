@@ -5,15 +5,31 @@ if ($mysqli->connect_errno) {
     printf("Connect failed: %s\n", $mysqli->connect_error);
     exit();
 }
-
+/*
+	Another check you can do is did they submit the form? In your veiwdb.html page I add name="submit" to your submit button.
+	You can now check ISSET($_POST["submit"]). This will tell you if someone used the right form, or accidently got to this page
+*/ 
 if (!isset($_REQUEST['StudentID'])) {
 header( "Location: http://localhost/mcw/ins/inspers.html" );
 }
 
-$Table = $_REQUEST['Table'] ;
+/*
+	You shouldn't use $_REQUEST unless you are not sure if the information is in a cookie, in the get, or in the post. You know you are using post so you can use $_POST['Table'] etc... The effects would be minimal but it is just good practice but kudos for assigning the information from the array to seperate variables.
+*/
+$Table = $_REQUEST['Table'] ; 
 $Attribute = $_REQUEST['Attribute'] ;
 $SearchText = $_REQUEST['SearchText'] ;
 
+/*
+	The only prepared statements i have done have be with datbase objects, not mysqli driver, so I may be wrong. But in PHP when you use double quotes you can access variables within the quotes. So for example:
+	$name = "rob"
+	double = "my name is $name"
+	single = 'my name is $name'
+	echo doube is my name is rob
+	echo sing is my name is $name 
+	
+	I am not sure but that might be what is causing your error
+*/
 if ($view = $mysqli->prepare("SELECT $Attribute FROM $Table WHERE $Attribute = %$SearchText%;")) {
 
 $view->execute();
@@ -22,6 +38,9 @@ printf("%s\n", $mysqli->info);
 $view->close();
 
 	}
+/*
+	use tabs! how do you expect me to read this :P
+*/
 switch ($Table)
 {
 case "Member":
